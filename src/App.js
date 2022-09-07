@@ -1,8 +1,8 @@
  import React, { useState } from "react";
-import ClassCounter from "./components/ClassCounter";
-import Counter from "./components/Counter";
-import PostItem from "./components/PostItem";
+ 
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
+import MyInput from "./components/UI/input/MyInput";
  import  './css styles/App.css';
 function App() {
     const[post,setPost] = useState([
@@ -16,9 +16,9 @@ function App() {
   return (
     <div className="App">
       <form>
-        <input type="text" placeholder="Name"/>
-        <input type="text" placeholder="Description"/>
-        <button>Add post</button>
+        <MyInput type="text" placeholder="Name"/>
+        <MyInput type="text" placeholder="Description"/>
+        <MyButton>Add post</MyButton>
       </form>
      <PostList post={post} title="List of Posts"/>
     </div>
