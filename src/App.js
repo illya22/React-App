@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+ import React, { useState } from "react";
+import ClassCounter from "./components/ClassCounter";
+import Counter from "./components/Counter";
+import PostItem from "./components/PostItem";
+import PostList from "./components/PostList";
+ import  './css styles/App.css';
 function App() {
+    const[post,setPost] = useState([
+      {id:1, title: 'first post', body:'description'},
+      {id:2, title: 'second post', body:'description'},
+      {id:3, title: 'third post', body:'description'},
+    ])
+  
+    
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <input type="text" placeholder="Name"/>
+        <input type="text" placeholder="Description"/>
+        <button>Add post</button>
+      </form>
+     <PostList post={post} title="List of Posts"/>
     </div>
   );
 }

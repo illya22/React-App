@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ 
+
+#root {
+display: flex;
+justify-content: center;
+}
+
+.App {
+    width: 1000px;
+    align-items: center;
+    text-align: center;
+}
+ .post {
+    display: flex;
+    padding: 15px;
+    border: 4mm ridge rgba(50, 189, 220, 0.6);
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+ }
