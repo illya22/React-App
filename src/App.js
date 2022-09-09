@@ -1,8 +1,9 @@
- import React, { useState} from "react";
+ import React, { useMemo, useState} from "react";
+import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
  
 import PostList from "./components/PostList";
-import MySelect from "./components/UI/select/MySelect";
+ 
  
  import  './css styles/App.css';
 function App() {
@@ -12,7 +13,21 @@ function App() {
       {id:3, title: 'bb', body:'ww'},
     ])
       
-    const [selectedSort,setSelectedSort] = useState('')
+    const [filter,setFilter] = useState({sort:'', query:''})
+
+    
+
+    const sortedPost = useMemo(() =>{
+      console.log('worked')
+      if(filter.sort){
+        return [...post].sort((a , b) => a[filter.sort].localeCompare(b[filter.sort]))
+      }
+      return post;
+    },[filter.sort,post])
+
+    const sortedandSearchedPost = useMemo(()=>{
+       return sortedPost.filter(post=>post.title.toLowerCase().includes(filter.query))
+    }, [filter.query,sortedPost])
 
     const createPost = (newPost) =>{
         setPost([...post,newPost])
@@ -22,33 +37,18 @@ function App() {
     setPost(post.filter(p => p.id !== posts.id))
    }
 
-  const sortPost = (sort) => {
-    setSelectedSort(sort)
-    setPost([...post].sort((a , b) => a[sort].localeCompare(b[sort])))
-  }
+ 
 
   return (
     <div className="App">
       <PostForm create={createPost}/>
       <hr style={{margin:'15px 0'}}/>
-      <div>
-        <MySelect
-        value={selectedSort}
-        onChange={sortPost}
-        defaultValue="Sort by"
-        options={[
-          {value:'title',name:'Sort by name'},
-          {value:'body',name:'Sort by description'},
-        ]}
-        />
-      </div>
-      {post.length !==0
-      ? 
-      <PostList remove={removePost} post={post} title="List of Posts"/>
-      :
-       <h1>There is no Posts!!!</h1>
-      }
-     
+       <PostFilter 
+       filter={filter}
+        setFilter={setFilter}/>
+      
+      <PostList remove={removePost} post={sortedandSearchedPost} title="List of Posts"/>
+ 
     </div>
   );
 }
