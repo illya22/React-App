@@ -14,10 +14,21 @@ function App() {
     const createPost = (newPost) =>{
         setPost([...post,newPost])
     }
+
+   const removePost = (posts) => {
+    setPost(post.filter(p => p.id !== posts.id))
+   }
+
   return (
     <div className="App">
       <PostForm create={createPost}/>
-     <PostList post={post} title="List of Posts"/>
+      {post.length !==0
+      ? 
+      <PostList remove={removePost} post={post} title="List of Posts"/>
+      :
+       <h1>There is no Posts!!!</h1>
+      }
+     
     </div>
   );
 }

@@ -6,13 +6,13 @@ const PostItem = (props) => {
     return (
         <div className="post">
         <div className="post_content">
-          <strong>{props.number} {props.post.title}</strong>
+          <strong>{props.number} {props.posts.title}</strong>
           <div>
-            {props.post.body}
+            {props.posts.body}
           </div>
         </div>
         <div className="post_btn">
-          <MyButton>Delete post</MyButton>
+          <MyButton onClick={() => props.remove(props.posts)}>Delete post</MyButton>
         </div>
       </div>
     );
